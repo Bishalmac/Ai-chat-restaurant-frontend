@@ -1,0 +1,118 @@
+:root {
+  /* --- Color tokens --- */
+  --bg: #1B1815;              /* warm ink, not pure black */
+  --surface: #241F1A;         /* raised panels on dark bg */
+  --surface-hover: #2E2822;
+  --paper: #F6EFE3;           /* ticket / receipt cream */
+  --paper-line: #E4D9C4;
+  --ink: #2A2420;             /* dark text on cream */
+  --text-primary: #F3ECE0;    /* light text on dark bg */
+  --text-muted: #B0A493;
+  --accent-saffron: #E3A008;  /* primary accent */
+  --accent-saffron-dim: #8C6512;
+  --accent-teal: #2F6E5F;     /* secondary / veg / fresh cue */
+  --accent-chili: #C1401F;    /* spice cue, used sparingly */
+  --border: rgba(243, 236, 224, 0.12);
+  --border-strong: rgba(243, 236, 224, 0.22);
+
+  /* --- Type --- */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-saffron);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+a {
+  color: var(--accent-saffron);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-saffron);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Signature element: the order ticket. Perforated top edge made
+   from a repeating radial-gradient "scallop", dot-leader rows
+   between item name and price like a kitchen docket, monospace
+   figures. Used by CartDrawer / OrderTicket.
+------------------------------------------------------------------ */
+.ticket {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.ticket::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: radial-gradient(circle at 10px 7px, var(--bg) 6px, transparent 6.5px);
+  background-size: 20px 14px;
+  background-repeat: repeat-x;
+}
+
+.ticket-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+}
+
+.ticket-row .leader {
+  flex: 1;
+  border-bottom: 1px dotted var(--paper-line);
+  transform: translateY(-3px);
+  min-width: 12px;
+}
+
+.ticket-row .name {
+  font-family: var(--font-body);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
